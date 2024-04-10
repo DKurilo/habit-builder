@@ -7,7 +7,7 @@ cradle:
       config: {cradle: {cabal: {component: "lib:habit-builder"}}}
 
     - path: "app"
-      config: {cradle: {cabal: {component: "habit-builder:habit-builder-exe"}}}
+      config: {cradle: {cabal: {component: "habit-builder:habit-builder-console"}}}
 
     - path: "test"
       config: {cradle: {cabal: {component: "habit-builder:habit-builder-test"}}}

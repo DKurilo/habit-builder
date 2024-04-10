@@ -1,17 +1,17 @@
 module Main where
 
-import Data.Maybe (fromMaybe, listToMaybe)
-import Lib (add, consolePrinter, fileGetter, fileSaver, remove, utcClock, view)
-import System.Environment (getArgs)
+import HabitBuilder.Adapters.Into.Console (Console (Console))
+import HabitBuilder.Adapters.Out.ConsolePrinter (ConsolePrinter (ConsolePrinter))
+import HabitBuilder.Adapters.Out.FileGetter (FileGetter (FileGetter))
+import HabitBuilder.Adapters.Out.FilePersister (FilePersister (FilePersister))
+import HabitBuilder.Adapters.Out.SystemClock (SystemClock (SystemClock))
+import HabitBuilder.Ports.Controller (Controller (run))
+import HabitBuilder.Usecases (mkAdd, mkRemove, mkView)
 
 main :: IO ()
 main = do
-  xs <- getArgs
-  let command = fromMaybe "help" . listToMaybe $ xs
-      name = fromMaybe "habit" . listToMaybe . drop 1 $ xs
+  let addUsecase = mkAdd ConsolePrinter FileGetter SystemClock FilePersister
+      removeUsecase = mkRemove ConsolePrinter FileGetter SystemClock FilePersister
+      viewUsecase = mkView ConsolePrinter FileGetter SystemClock FilePersister
 
-  case command of
-    "view" -> view consolePrinter fileGetter utcClock fileSaver name
-    "add" -> add consolePrinter fileGetter utcClock fileSaver name
-    "remove" -> remove consolePrinter fileGetter utcClock fileSaver name
-    _ -> error "wrong command"
+  run $ Console viewUsecase addUsecase removeUsecase

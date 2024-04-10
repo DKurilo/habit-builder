@@ -18,7 +18,7 @@ extra-doc-files:
 -- homepage:        https://github.com/FIXME/habit-builder#readme
 -- source-repository head
 --   type:     git
---   location: git://github.com/FIXME/habit-builder.git
+--   location: git://github.com/DKurilo/habit-builder.git
 
 common common-options
   build-depends:    base >=4.9 && <5
@@ -31,14 +31,27 @@ common common-options
 library
   import:          common-options
   hs-source-dirs:  src
-  exposed-modules: Lib
+  exposed-modules:
+    HabitBuilder.Adapters.Into.Console
+    , HabitBuilder.Adapters.Out.ConsolePrinter
+    , HabitBuilder.Adapters.Out.FileGetter
+    , HabitBuilder.Adapters.Out.FilePersister
+    , HabitBuilder.Adapters.Out.SystemClock
+    , HabitBuilder.Domains.Habit
+    , HabitBuilder.Ports.Clock
+    , HabitBuilder.Ports.Controller
+    , HabitBuilder.Ports.Getter
+    , HabitBuilder.Ports.Persister
+    , HabitBuilder.Ports.Printer
+    , HabitBuilder.Ports.Usecases
+    , HabitBuilder.Usecases
   build-depends:
     , containers
     , mtl
     , split
     , time
 
-executable habit-builder-exe
+executable habit-builder-console
   import:         common-options
   hs-source-dirs: app
   main-is:        Main.hs

@@ -34,7 +34,7 @@ to add one credit
 ```
 to remove one credit
 
-In case file name is habbit you can skip it.
+In case file name is habit you can skip it.
 
 ## Additional idea to Check
 Also I wanted to check how Haskell can live with clean architecture and on this very primitive example I love how it works.
