@@ -11,6 +11,3 @@ cradle:
 
     - path: "test"
       config: {cradle: {cabal: {component: "habit-builder:habit-builder-test"}}}
-
-    - path: "bench"
-      config: {cradle: {cabal: {component: "habit-builder:habit-builder-bench"}}}
