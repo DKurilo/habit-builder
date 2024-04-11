@@ -22,17 +22,17 @@ nix build
 
 Run:
 ```
-./result/bin/habit-builder-exe view <filename>
+./result/bin/habit-builder-console view <filename>
 ```
 to view current credits
 
 ```
-./result/bin/habit-builder-exe add <filename>
+./result/bin/habit-builder-console add <filename>
 ```
 to add one credit
 
 ```
-./result/bin/habit-builder-exe remove <filename>
+./result/bin/habit-builder-console remove <filename>
 ```
 to remove one credit
 
