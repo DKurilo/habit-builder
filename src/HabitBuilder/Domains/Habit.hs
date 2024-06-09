@@ -16,7 +16,7 @@ import Text.Read
 
 type Habit = String
 
-data SavedHabitBuilder = SHB {shbCreditPerHours :: Int, shbLastTime :: UTCTime, shbCredits :: Int}
+data SavedHabitBuilder = SHB {shbCreditPerHours :: !Int, shbLastTime :: !UTCTime, shbCredits :: !Int}
 
 instance Read SavedHabitBuilder where
   readPrec = do
@@ -32,7 +32,7 @@ instance Show SavedHabitBuilder where
 mkSavedHabitBuilder :: HabitBuilder -> SavedHabitBuilder
 mkSavedHabitBuilder hb = SHB (hbCreditPerHours hb) (hbLastTime hb) (hbCredits hb)
 
-data HabitBuilder = HB {hbCreditPerHours :: Int, hbLastTime :: UTCTime, hbCredits :: Int, hbNow :: UTCTime}
+data HabitBuilder = HB {hbCreditPerHours :: !Int, hbLastTime :: !UTCTime, hbCredits :: !Int, hbNow :: !UTCTime}
 
 mkHabitBuilder :: SavedHabitBuilder -> UTCTime -> HabitBuilder
 mkHabitBuilder shb = HB (shbCreditPerHours shb) (shbLastTime shb) (shbCredits shb)
@@ -50,8 +50,8 @@ updateHabitBuilder hb = hb {hbLastTime = lastTime, hbCredits = hbCredits hb - cr
         $ hb
     lastTime = addUTCTime (fromIntegral (credits * creditPerSeconds)) . hbLastTime $ hb
 
-addCredit :: HabitBuilder -> HabitBuilder
-addCredit hb = hb {hbCredits = hbCredits hb + 1}
+addCredit :: Int -> HabitBuilder -> HabitBuilder
+addCredit x hb = hb {hbCredits = hbCredits hb + x}
 
-removeCredit :: HabitBuilder -> HabitBuilder
-removeCredit hb = hb {hbCredits = hbCredits hb - 1}
+removeCredit :: Int -> HabitBuilder -> HabitBuilder
+removeCredit x hb = hb {hbCredits = hbCredits hb - x}
